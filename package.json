@@ -1,0 +1,35 @@
+{
+  "name": "cloverhearts",
+  "version": "0.0.1",
+  "description": "CloverHearts profile repository",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cloverhearts/cloverhearts.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cloverhearts/cloverhearts/issues"
+  },
+  "homepage": "https://github.com/cloverhearts/cloverhearts#readme",
+  "dependencies": {
+    "milligram": "^1.4.1",
+    "next": "^9.5.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  },
+  "devDependencies": {
+    "@types/node": "^14.0.27",
+    "@types/react": "^16.9.44",
+    "sass": "^1.26.10",
+    "typescript": "^3.9.7",
+    "typescript-plugin-css-modules": "^2.4.0"
+  }
+}
