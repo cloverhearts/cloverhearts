@@ -1,12 +1,10 @@
 import React from 'react'
-import styles from './clover.module.scss'
+import styles from './clover.module.css'
 export default function index() {
-    return (
-        <div className={``}>
-            Hello
-            <div className={styles.world}>
-                world
-            </div>
-        </div>
-    )
+  return (
+    <div className={styles.hello}>
+      Hello
+      <div>world</div>
+    </div>
+  )
 }

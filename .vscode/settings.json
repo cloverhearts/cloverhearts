@@ -1,0 +1,4 @@
+{
+  "editor.formatOnSave": true,
+  "typescript.tsserver.pluginPaths": ["typescript-plugin-css-modules"]
+}

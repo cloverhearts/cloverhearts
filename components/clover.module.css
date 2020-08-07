@@ -1,0 +1,6 @@
+.hello {
+  background: #000;
+  .world {
+    background: red;
+  }
+}
