@@ -1,21 +1,15 @@
 import React from 'react'
-import Clover from '../components/clover'
 import Link from 'next/link'
-export default function index() {
+import ContentLayout from '@layouts/Content'
+
+export default function index(): JSX.Element {
   return (
-    <article>
-      <header>Hello CloverHearts web page</header>
+    <ContentLayout
+      title={`Hello title`}
+    >
       <p>
-        <div className={`hello`}>
-          <div className={`world`}>Hello world</div>
-        </div>
-        Nice body context
-        <button>버튼</button>
-        <Clover />
-        <Link href="/about">
-          <a>Index</a>
-        </Link>
+        Content
       </p>
-    </article>
+    </ContentLayout>
   )
 }
