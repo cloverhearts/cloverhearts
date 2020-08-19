@@ -1,0 +1,37 @@
+section.articleSection {
+  margin: 0 auto;
+  border: 1px dotted black;
+  word-break: keep-all;
+
+  header {
+    word-break: keep-all;
+  }
+
+
+  @media (min-width: 1025px) {
+    width: 900px;
+    background: yellowgreen;
+    &.fullWidth {
+      width: 100%;
+      background: green;
+    }
+  }
+
+  @media (min-width: 481px) and (max-width: 1024px) {
+    width: 90%;
+    background: green;
+    &.fullWidth {
+      width: 100%;
+      background: green;
+    }
+  }
+
+  @media (max-width: 480px) {
+    width: 90%;
+    background: aqua;
+    &.fullWidth {
+      width: 100%;
+      background: green;
+    }
+  }
+}

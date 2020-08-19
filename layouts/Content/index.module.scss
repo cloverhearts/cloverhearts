@@ -4,25 +4,4 @@
   justify-content: center;
   flex-direction: column;
   width: 100%;
-
-
-  .contentContainer {
-    background: blue;
-    margin: 0 auto;
-
-    @media (min-width: 1025px) {
-      width: 900px;
-      background: yellowgreen;
-    }
-
-    @media (min-width: 481px) and (max-width: 1024px) {
-      width: 90%;
-      background: green;
-    }
-
-    @media (max-width: 480px) {
-      width: 90%;
-      background: aqua;
-    }
-  }
 }

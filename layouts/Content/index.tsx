@@ -1,5 +1,9 @@
 import React from 'react'
-import ArticleHeader from '@components/ArticleHeader'
+
+import Footer from '@layouts/Footer'
+import Nav from '@layouts/Header/Nav'
+import ArticleHeader from '@components/Article/Header'
+
 import styles from './index.module.scss'
 
 type ContentProps = {
@@ -10,14 +14,16 @@ type ContentProps = {
 function layout(props: ContentProps): JSX.Element {
   const { title, children } = props
   return (
-    <main>
-      <article className={styles.mainArticle}>
-        <ArticleHeader title={title}/>
-        <section className={styles.contentContainer}>
+    <>
+      <Nav/>
+      <main>
+        <article className={styles.mainArticle}>
+          <ArticleHeader title={title}/>
           {children ? children : <></>}
-        </section>
-      </article>
-    </main>
+        </article>
+      </main>
+      <Footer/>
+    </>
   )
 }
 
