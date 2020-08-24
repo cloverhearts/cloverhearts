@@ -3,7 +3,7 @@ import Document, {
   Head,
   Main,
   NextScript,
-  DocumentContext,
+  DocumentContext
 } from 'next/document'
 
 class MyDocument extends Document {
@@ -12,13 +12,13 @@ class MyDocument extends Document {
     return initialProps
   }
 
-  render() {
+  render(): JSX.Element {
     return (
       <Html>
         <Head></Head>
         <body>
-          <Main />
-          <NextScript />
+        <Main/>
+        <NextScript/>
         </body>
       </Html>
     )

@@ -7,6 +7,12 @@
       ],
       "@layouts/*": [
         "./layouts/*"
+      ],
+      "@store/*": [
+        "./store/*"
+      ],
+      "@sagas/*": [
+        "./sagas/*"
       ]
     },
     "target": "es5",

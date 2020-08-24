@@ -41,5 +41,7 @@ header.container {
     text-align: center;
     color: transparent;
     word-break: keep-all;
+    transition: all .2s ease-out;
+    font-weight: bold;
   }
 }
