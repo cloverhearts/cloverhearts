@@ -23,6 +23,7 @@
   "dependencies": {
     "@types/react-redux": "^7.1.9",
     "@types/redux": "^3.6.0",
+    "kotton-css": "^1.0.1",
     "lodash": "^4.17.20",
     "milligram": "^1.4.1",
     "next": "^9.5.1",

@@ -1,7 +1,7 @@
 import type { AppProps /*, AppContext */ } from 'next/app'
 import AppContainer from '@components/Wrap/AppContainer'
 
-import 'milligram'
+import 'kotton-css'
 import '@layouts/styles.scss'
 
 function MyApp({ Component, pageProps }: AppProps) {

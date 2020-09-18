@@ -15,7 +15,9 @@ header.container {
     left: -5%;
     top: -5%;
     content: '';
-    background: fixed no-repeat center/cover url('https://cdn.mos.cms.futurecdn.net/G9Qw6643nhGwnMzwRn7fMB-1200-80.jpg') rgba(0, 0, 0, 1);
+    // background: fixed no-repeat center/cover
+    //   url('https://cdn.mos.cms.futurecdn.net/G9Qw6643nhGwnMzwRn7fMB-1200-80.jpg')
+    //   rgba(0, 0, 0, 1);
     font-size: 72px;
     font-weight: bold;
     filter: blur(2px);
@@ -26,12 +28,11 @@ header.container {
     position: absolute;
     top: 0;
     left: 0;
-    background: rgba(0, 0, 0, 0.3);
+    // background: rgba(0, 0, 0, 0.3);
     width: 100%;
     height: 100%;
     content: '';
   }
-
 
   h1 {
     z-index: 10;
@@ -39,9 +40,9 @@ header.container {
     -webkit-background-clip: text;
     margin: 0;
     text-align: center;
-    color: transparent;
+
     word-break: keep-all;
-    transition: all .2s ease-out;
-    font-weight: bold;
+    transition: all 0.2s ease-out;
+    font-size: 5rem;
   }
 }
