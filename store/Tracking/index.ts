@@ -3,5 +3,5 @@ import initializeState from './state'
 
 export default {
   reducer,
-  initializeState
+  initializeState,
 }

@@ -3,7 +3,7 @@ import Document, {
   Head,
   Main,
   NextScript,
-  DocumentContext
+  DocumentContext,
 } from 'next/document'
 
 class MyDocument extends Document {
@@ -17,8 +17,8 @@ class MyDocument extends Document {
       <Html>
         <Head></Head>
         <body className={`kotton-style`}>
-        <Main/>
-        <NextScript/>
+          <Main />
+          <NextScript />
         </body>
       </Html>
     )

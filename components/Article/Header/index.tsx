@@ -10,6 +10,7 @@ function ArticleHeader(props: ArticleHeaderProps): JSX.Element {
   const { title } = props
   const headingElement = createRef<HTMLHeadingElement>()
   const viewPort = useSelector((state) => state.tracking.viewPort)
+
   const [scaleValue, setScaleValue] = useState('1.0')
   useEffect(() => {
     const { current } = headingElement

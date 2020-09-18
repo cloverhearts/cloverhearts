@@ -9,11 +9,10 @@ export default function TrackingReducer(_state = _initstate, action): any {
         scroll: parseInt(action.value.scroll),
         leave: parseInt(action.value.leave),
         show: parseInt(action.value.show),
-        available: parseInt(action.value.available)
+        available: parseInt(action.value.available),
       }
       return { ...state }
     default:
       return state
   }
 }
-

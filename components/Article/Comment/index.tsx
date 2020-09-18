@@ -8,9 +8,5 @@ type CommentProps = {
 
 export default function Comment(props: CommentProps): JSX.Element {
   const { message } = props
-  return (
-    <span className={styles.articleComment}>
-      {message}
-    </span>
-  )
+  return <span className={styles.articleComment}>{message}</span>
 }

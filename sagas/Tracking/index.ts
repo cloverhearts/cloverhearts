@@ -10,5 +10,9 @@ function* setViewPortValue(context, action) {
 }
 
 export default function* rootSaga(externalContext) {
-  yield takeLatest(ACTION_TYPES.REQ_SET_VIEWPORT, setViewPortValue, externalContext)
+  yield takeLatest(
+    ACTION_TYPES.REQ_SET_VIEWPORT,
+    setViewPortValue,
+    externalContext
+  )
 }

@@ -8,7 +8,9 @@ type ViewportSPYWrapProps = {
   children: React.ReactNode
 }
 
-export default function ViewportSPYWrap(props: ViewportSPYWrapProps): JSX.Element {
+export default function ViewportSPYWrap(
+  props: ViewportSPYWrapProps
+): JSX.Element {
   const dispatch = useDispatch()
   const viewportSpyRef = createRef<HTMLDivElement>()
   const { children } = props
@@ -23,13 +25,16 @@ export default function ViewportSPYWrap(props: ViewportSPYWrapProps): JSX.Elemen
       const onScrollEvent = throttle(() => {
         const leaveElePosY = window.scrollY + leaveEle.getBoundingClientRect().y
         const showElePosY = window.scrollY + showEle.getBoundingClientRect().y
-        const availableElePosY = window.scrollY + availableEle.getBoundingClientRect().y
-        dispatch(setViewPortValue({
-          scroll: window.scrollY,
-          leave: leaveElePosY,
-          show: showElePosY,
-          available: availableElePosY
-        }))
+        const availableElePosY =
+          window.scrollY + availableEle.getBoundingClientRect().y
+        dispatch(
+          setViewPortValue({
+            scroll: window.scrollY,
+            leave: leaveElePosY,
+            show: showElePosY,
+            available: availableElePosY,
+          })
+        )
       }, delayWaitMS)
       window.addEventListener('scroll', onScrollEvent)
       onScrollEvent()
@@ -40,10 +45,7 @@ export default function ViewportSPYWrap(props: ViewportSPYWrapProps): JSX.Elemen
   useEffect(setScrollPositionValueFunction, [])
   return (
     <>
-      <div
-        ref={viewportSpyRef}
-        className={styles.viewportSpy}
-      >
+      <div ref={viewportSpyRef} className={styles.viewportSpy}>
         <div className={styles.leave}>LEAVE :</div>
         <div className={styles.show}>SHOW :</div>
         <div className={styles.available}>AVAILABLE :</div>

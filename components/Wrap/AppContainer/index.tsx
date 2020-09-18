@@ -11,9 +11,7 @@ export default function AppContainer(props: AppContainerProps): JSX.Element {
   return (
     <>
       <ProviderContextContainer>
-        <ViewportSPYWrap>
-          {children}
-        </ViewportSPYWrap>
+        <ViewportSPYWrap>{children}</ViewportSPYWrap>
       </ProviderContextContainer>
     </>
   )
