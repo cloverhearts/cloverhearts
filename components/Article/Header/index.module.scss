@@ -40,9 +40,10 @@ header.container {
     -webkit-background-clip: text;
     margin: 0;
     text-align: center;
-
     word-break: keep-all;
     transition: all 0.2s ease-out;
     font-size: 5rem;
+    line-height: 6rem;
+    padding: 5px;
   }
 }
