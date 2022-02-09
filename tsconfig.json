@@ -2,13 +2,25 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@components/*": ["./components/*"],
-      "@layouts/*": ["./layouts/*"],
-      "@store/*": ["./store/*"],
-      "@sagas/*": ["./sagas/*"]
+      "@components/*": [
+        "./components/*"
+      ],
+      "@layouts/*": [
+        "./layouts/*"
+      ],
+      "@store/*": [
+        "./store/*"
+      ],
+      "@sagas/*": [
+        "./sagas/*"
+      ]
     },
     "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": false,
@@ -24,8 +36,18 @@
       {
         "name": "typescript-plugin-css-modules"
       }
-    ]
+    ],
+    "incremental": true
   },
-  "include": ["@types", "next-env.d.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules", ".next", "out"]
+  "include": [
+    "@types",
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules",
+    ".next",
+    "out"
+  ]
 }
