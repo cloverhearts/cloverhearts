@@ -1,30 +1,16 @@
-import React, { createRef, useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import React from 'react'
 import styles from './index.module.scss'
 
-type ArticleHeaderProps = {
-  title: string
+type HeaderProps = {
+    className?: string,
+    children?: React.ReactNode
 }
 
-function ArticleHeader(props: ArticleHeaderProps): JSX.Element {
-  const { title } = props
-  const headingElement = createRef<HTMLHeadingElement>()
-  const viewPort = useSelector((state) => state.tracking.viewPort)
-
-  const [scaleValue, setScaleValue] = useState('1.0')
-  useEffect(() => {
-    const { current } = headingElement
-    const leavePosition = viewPort.leave
-    const headerHeight = current.getBoundingClientRect().height
-    if (current && leavePosition <= headerHeight) {
-      setScaleValue((1 - leavePosition / headerHeight).toFixed(2))
-    }
-  }, [headingElement, viewPort])
-  return (
-    <header ref={headingElement} className={styles.container}>
-      <h1 style={{ transform: `scale(${scaleValue})` }}>{title}</h1>
-    </header>
-  )
+export default function Header(props: HeaderProps) : JSX.Element {
+    const { children, className } = props
+    return (
+        <header className={`${className} ${styles.default}`}>
+            { children }
+        </header>
+    )
 }
-
-export default ArticleHeader

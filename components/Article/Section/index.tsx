@@ -3,24 +3,17 @@ import React from 'react'
 import styles from './index.module.scss'
 
 type SectionProps = {
-  title?: string
-  fullWidth?: boolean
+  className?: string,
   children?: React.ReactNode
 }
 
 export default function Section(props: SectionProps): JSX.Element {
-  const { title, children, fullWidth } = props
+  const { children, className } = props
   return (
     <section
-      className={`${!fullWidth ? styles.articleSection : styles.fullWidth}`}
+      className={[className, styles.default].join(' ')}
     >
-      {title ? (
-        <header>
-          <h2>{title}</h2>
-        </header>
-      ) : null}
-
-      {children ? children : <></>}
+      { children }
     </section>
   )
 }

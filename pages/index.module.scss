@@ -1,0 +1,35 @@
+
+.IndexHeaderSection {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.ContentNav {
+  display: flex;
+  align-self: flex-end;
+  background: yellowgreen;
+  width: 100%;
+}
+
+.MainSectionHeader {
+  display: block;
+  position: absolute;
+  text-align: center;
+}
+
+.NameHeader {
+  display: block;
+  font-size: 9.6rem;
+  margin: 0;
+}
+
+.JobHeader {
+  display: block;
+  font-family: 'Roboto';
+  font-size: 4.8rem;
+  font-weight: 400;
+  margin: 0;
+  opacity: 0.3;
+}

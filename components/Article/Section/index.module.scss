@@ -1,29 +1,4 @@
-section.articleSection {
-  margin: 0 auto;
-  word-break: keep-all;
-
-  header {
-    word-break: keep-all;
-  }
-
-  @media (min-width: 1025px) {
-    width: 900px;
-    &.fullWidth {
-      width: 100%;
-    }
-  }
-
-  @media (min-width: 481px) and (max-width: 1024px) {
-    width: 90%;
-    &.fullWidth {
-      width: 100%;
-    }
-  }
-
-  @media (max-width: 480px) {
-    width: 90%;
-    &.fullWidth {
-      width: 100%;
-    }
-  }
+section.default {
+  min-height: 100vh;
+  position: relative;
 }
