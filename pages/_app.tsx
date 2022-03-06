@@ -1,6 +1,5 @@
 import type { AppProps /*, AppContext */ } from 'next/app'
 import AppContainer from '@components/Wrap/AppContainer'
-
 import 'kotton-css'
 import '@layouts/styles.scss'
 

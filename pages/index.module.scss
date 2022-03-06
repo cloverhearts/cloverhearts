@@ -4,32 +4,139 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
+
+  header {
+    font-family: 'Unna', serif;
+    color: #505050;
+    font-size: 4.8rem;
+    font-weight: 400;
+    margin: 0 0 0 0;
+  }
+
+  .ContentNav {
+    display: flex;
+    align-self: flex-end;
+    width: 100%;
+  }
+
+  .MainSectionHeader {
+    display: block;
+    position: absolute;
+    text-align: center;
+  }
+
+  .NameHeaderTitle {
+    display: block;
+    font-size: 9.6rem;
+    margin: 0;
+  }
+
+  .JobHeaderTitle {
+    display: block;
+    font-family: 'Roboto';
+    font-size: 4.8rem;
+    font-weight: 400;
+    margin: 0;
+    opacity: 0.3;
+  }
 }
 
-.ContentNav {
+.SelfDescriptionSection {
   display: flex;
-  align-self: flex-end;
-  background: yellowgreen;
-  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-left: -10rem;
+  .DescriptionSectionHeader {
+    text-align: center;
+  }
+  .DescriptionHeaderTitle {
+    font-family: "Unna", serif;
+    font-size: 4.8rem;
+    font-weight: 400;
+    margin: 0 0 1rem;
+  }
+  .Context {
+    font-family: "Noto sans kr", serif;
+    min-width: 30rem;
+    margin-top: 0;
+    margin-left: 19rem;
+    font-weight: 300;
+    p {
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+    }
+  }
 }
 
-.MainSectionHeader {
-  display: block;
-  position: absolute;
-  text-align: center;
+.PhilosophySection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-left: -10rem;
+  .PhilosophySectionHeader {
+    text-align: center;
+  }
+  .PhilosophyHeaderTitle {
+    font-family: "Unna", serif;
+    font-size: 4.8rem;
+    font-weight: 400;
+    margin: 0rem;
+  }
+  .SubTitles {
+    display: flex;
+    flex-direction: row;
+    font-family: "Noto sans kr", serif;
+    margin-left: 0.3rem;
+    h3 {
+      flex: 0.3;
+      margin: 0.5rem 0 2rem 0;
+      text-align: left;
+      font-weight: 400;
+    }
+  }
+  .Context {
+    font-family: "Noto sans kr", serif;
+    min-width: 30rem;
+    margin-top: 4rem;
+    margin-left: 14rem;
+    font-weight: 300;
+    p {
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .blank {
+      height: 1rem;
+    }
+  }
 }
 
-.NameHeader {
-  display: block;
-  font-size: 9.6rem;
-  margin: 0;
-}
+.ProjectSkillsSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-left: -10rem;
 
-.JobHeader {
-  display: block;
-  font-family: 'Roboto';
-  font-size: 4.8rem;
-  font-weight: 400;
-  margin: 0;
-  opacity: 0.3;
+  .ProjectSkillsSectionHeader {
+    text-align: center;
+  }
+  .ProjectSkillsHeaderTitle {
+    font-family: "Unna", serif;
+    font-size: 4.8rem;
+    font-weight: 400;
+    margin: 0rem;
+  }
+
+  .Context {
+    margin-top: 8rem;
+    margin-left: -15rem;
+    p {
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+    }
+  }
+
 }

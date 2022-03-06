@@ -1,0 +1,12 @@
+.contentNavContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 6rem;
+
+  div {
+    flex: auto;
+    flex-grow: 1;
+  }
+
+}

@@ -1,4 +1,24 @@
 header.default {
   font-family: 'Unna', serif;
   color: #505050;
+  font-size: 4.8rem;
+  font-weight: 400;
+  margin: 0 0 0 0;
+  h2 {
+    position: relative;
+    margin: 0;
+  }
+}
+
+.HgroupTagsContainer {
+  position: absolute;
+  left: 0;
+  right: 0;
+  max-width: 100%;
+  font-size: 2rem;
+  text-align: left;
+  h1, h2, h3, h4, h5, h6 {
+    display: inline-block;
+    margin: 0.5rem 1rem 0 0;
+  }
 }
