@@ -4,9 +4,16 @@
   justify-content: space-between;
   padding: 6rem;
 
+  @media (max-width: 1100px) {
+    padding: 3rem;
+  }
+
   div {
     flex: auto;
     flex-grow: 1;
+    @media (max-width: 1100px) {
+      margin: 0 auto;
+    }
   }
 
 }

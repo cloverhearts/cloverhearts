@@ -1,6 +1,6 @@
-import React from 'react'
+import React from "react";
 
-import styles from './index.module.scss'
+import styles from "./index.module.scss";
 
 type SectionProps = {
   className?: string,
@@ -8,12 +8,12 @@ type SectionProps = {
 }
 
 export default function Section(props: SectionProps): JSX.Element {
-  const { children, className } = props
+  const { children, className } = props;
   return (
     <section
-      className={[className, styles.default].join(' ')}
+      className={[className, styles.default].join(" ")}
     >
-      { children }
+      {children}
     </section>
-  )
+  );
 }

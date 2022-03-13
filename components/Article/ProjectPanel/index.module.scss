@@ -1,0 +1,23 @@
+.ProjectPanel {
+  display: block;
+  max-width: 40rem;
+  padding: 1.5rem 3rem;
+  &:hover {
+    background: rgba(0, 0, 30, 0.3);
+  }
+
+  h4 {
+    font-size: 2.2rem;
+  }
+
+  .DescriptionContainer {
+    p {
+      margin: 0;
+    }
+  }
+  .UsedSkillsContainer {
+    p {
+      margin: 0;
+    }
+  }
+}
