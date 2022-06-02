@@ -1,5 +1,6 @@
 import { Client } from "@notionhq/client";
 import { NotionPost } from "./Notion/Models/Post";
+import { NotionBlock } from './Notion/Models/Blocks'
 import dayjs from "dayjs";
 
 const notion = new Client({
@@ -8,6 +9,38 @@ const notion = new Client({
 
 const getBlogPageID = () => "9ddacb35b6b344d6a0f41fb036723e7e";
 const getBlogPublicDatabaseID = () => "f6ea8bfdf160445daffe0c8cc755bc7a";
+
+type CommonBlockType = { object: string, type: string };
+
+const notionBlockNomalizer = (blocks:CommonBlockType[]): BlockItem[] => {
+  const normalizedBlocks:BlockItem[] = []
+
+  blocks
+    .filter(block => block.object === 'block' )
+    .map(block => {
+      const rawRes:any = block
+      if (block.type === 'paragraph') {
+        const richTexts:any[] = rawRes[block.type]['rich_text']
+        const paragraph = NotionBlock.Builder()
+        richTexts.map((richText:any) => {
+          const type = richText.type
+          const attributes: string[] = Object.keys(richText.annotations)
+                                              .filter(annotation => richText.annotations[annotation])
+                                              .map(annotation => {
+                                                if (annotation === 'color') {
+                                                  return `color-${richText.annotations[annotation]}`
+                                                }
+                                                return richText.annotations[annotation]
+                                              })
+
+          console.log('BLOCK ', type, attributes)
+        })
+      }
+    })
+
+
+  return normalizedBlocks
+}
 
 export default {
   getBlogPageID,
@@ -66,7 +99,7 @@ export default {
       const blocks: any = await notion.blocks.children.list({
         block_id: "bdbe5605-0155-4c03-a3a2-8f20ed231d5d",
       });
-      console.log("BLOCKS ", JSON.stringify(blocks));
+      notionBlockNomalizer(blocks.results)
     } catch (e) {
       console.error("Cannot found postPage from ", pageID, e);
     }
