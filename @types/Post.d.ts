@@ -12,5 +12,3 @@ declare interface PostItem {
   readonly subject: PostTag;
   readonly keywords: PostTag[];
 }
-
-declare interface PostPage extends PostItem {}

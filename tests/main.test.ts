@@ -5,5 +5,8 @@ it("My first jest test case", async () => {
   console.log("LIST ", pages);
   const firstPage = await NOTION_APIS.getPostPage(pages[0].id);
   console.log("FIRST PAGE ", firstPage);
+
+  console.log(firstPage.content.map((e) => e.toHTML()).join("\n"));
+
   expect(true).toBe(true);
 });

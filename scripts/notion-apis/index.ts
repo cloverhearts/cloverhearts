@@ -1,7 +1,9 @@
 import { Client } from "@notionhq/client";
 import { NotionPost } from "./Notion/Models/Post";
-import { NotionBlock } from './Notion/Models/Blocks'
+import { NotionBlock } from "./Notion/Models/Blocks";
 import dayjs from "dayjs";
+import { paragraphParse } from "./Notion/Blocks/Paragraph";
+import { NotionPage } from "./Notion/Models/Page";
 
 const notion = new Client({
   auth: process.env.NOTION_TOKEN,
@@ -10,37 +12,22 @@ const notion = new Client({
 const getBlogPageID = () => "9ddacb35b6b344d6a0f41fb036723e7e";
 const getBlogPublicDatabaseID = () => "f6ea8bfdf160445daffe0c8cc755bc7a";
 
-type CommonBlockType = { object: string, type: string };
+type CommonBlockType = { object: string; type: string };
 
-const notionBlockNomalizer = (blocks:CommonBlockType[]): BlockItem[] => {
-  const normalizedBlocks:BlockItem[] = []
-
-  blocks
-    .filter(block => block.object === 'block' )
-    .map(block => {
-      const rawRes:any = block
-      if (block.type === 'paragraph') {
-        const richTexts:any[] = rawRes[block.type]['rich_text']
-        const paragraph = NotionBlock.Builder()
-        richTexts.map((richText:any) => {
-          const type = richText.type
-          const attributes: string[] = Object.keys(richText.annotations)
-                                              .filter(annotation => richText.annotations[annotation])
-                                              .map(annotation => {
-                                                if (annotation === 'color') {
-                                                  return `color-${richText.annotations[annotation]}`
-                                                }
-                                                return richText.annotations[annotation]
-                                              })
-
-          console.log('BLOCK ', type, attributes)
-        })
+const notionBlockNormalizer = (blocks: CommonBlockType[]): BlockItem[] => {
+  return blocks
+    .filter((block) => block.object === "block")
+    .map((block) => {
+      if (block.type === "paragraph") {
+        return paragraphParse(block);
+      } else {
+        console.log("UNKNOWN BLOCK TYPE", block.type);
+        console.log("UNKNOWN BLOCK CONTENT ", block);
       }
+      return NotionBlock.Builder().build();
     })
-
-
-  return normalizedBlocks
-}
+    .filter((e) => e && e.id !== "UNKNOWN_ID");
+};
 
 export default {
   getBlogPageID,
@@ -87,7 +74,7 @@ export default {
     }
     return [];
   },
-  getPostPage: async (pageID: string): Promise<PostPage> => {
+  getPostPage: async (pageID: string): Promise<Page> => {
     try {
       const postPageRes: any = await notion.pages.retrieve({ page_id: pageID });
       console.log("PAGE ", postPageRes);
@@ -99,7 +86,18 @@ export default {
       const blocks: any = await notion.blocks.children.list({
         block_id: "bdbe5605-0155-4c03-a3a2-8f20ed231d5d",
       });
-      notionBlockNomalizer(blocks.results)
+      const content = notionBlockNormalizer(blocks.results);
+
+      const page = NotionPage.Builder();
+      const subjectType = postPageRes.properties.Subject["type"];
+      const keywordsType = postPageRes.properties.Keywords["type"];
+      page.id = pageID;
+      page.subject = postPageRes.properties.Subject[subjectType];
+      page.keywords = postPageRes.properties.Keywords[keywordsType];
+      page.createdAt = dayjs(postPageRes.created_time).toDate();
+      page.updatedAt = dayjs(postPageRes.last_edited_time).toDate();
+      page.content = content;
+      return page.build();
     } catch (e) {
       console.error("Cannot found postPage from ", pageID, e);
     }
@@ -111,6 +109,7 @@ export default {
       updatedAt: dayjs().toDate(),
       keywords: [],
       subject: { color: "default", id: "UNKNOWN_ID", name: "UNKNOWN" },
+      content: [],
     };
   },
 };
