@@ -6,5 +6,5 @@ declare interface BlockItem {
   readonly attributes: string[];
   readonly children: BlockItem[];
 
-  toHTML(): string;
+  toHTML(nestedBlocksHTML?: string): string;
 }

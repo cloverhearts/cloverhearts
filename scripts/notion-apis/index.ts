@@ -2,8 +2,16 @@ import { Client } from "@notionhq/client";
 import { NotionPost } from "./Notion/Models/Post";
 import { NotionBlock } from "./Notion/Models/Blocks";
 import dayjs from "dayjs";
-import { paragraphParse } from "./Notion/Blocks/Paragraph";
 import { NotionPage } from "./Notion/Models/Page";
+import { ParagraphBlock } from "./Notion/Blocks/Paragraph/index.model";
+import { Heading1Block } from "./Notion/Blocks/Heading_1/index.model";
+import { Heading2Block } from "./Notion/Blocks/Heading_2/index.model";
+import { Heading3Block } from "./Notion/Blocks/Heading_3/index.model";
+import { QuoteBlock } from "./Notion/Blocks/Quote/index.model";
+import { DividerBlock } from "./Notion/Blocks/Divider/index.model";
+import { BookmarkBlock } from "./Notion/Blocks/Bookmark/index.model";
+import { VideoBlock } from "./Notion/Blocks/Video/index.model";
+import { ImageBlock } from "./Notion/Blocks/Image/index.model";
 
 const notion = new Client({
   auth: process.env.NOTION_TOKEN,
@@ -18,12 +26,29 @@ const notionBlockNormalizer = (blocks: CommonBlockType[]): BlockItem[] => {
   return blocks
     .filter((block) => block.object === "block")
     .map((block) => {
-      if (block.type === "paragraph") {
-        return paragraphParse(block);
-      } else {
-        console.log("UNKNOWN BLOCK TYPE", block.type);
-        console.log("UNKNOWN BLOCK CONTENT ", block);
+      switch (block.type) {
+        case "heading_1":
+          return Heading1Block.build(block);
+        case "heading_2":
+          return Heading2Block.build(block);
+        case "heading_3":
+          return Heading3Block.build(block);
+        case "paragraph":
+          return ParagraphBlock.build(block);
+        case "quote":
+          return QuoteBlock.build(block);
+        case "divider":
+          return DividerBlock.build(block);
+        case "bookmark":
+          return BookmarkBlock.build(block);
+        case "video":
+          return VideoBlock.build(block);
+        case "image":
+          return ImageBlock.build(block);
+        default:
+          console.log("UNKNOWN BLOCK", block);
       }
+
       return NotionBlock.Builder().build();
     })
     .filter((e) => e && e.id !== "UNKNOWN_ID");

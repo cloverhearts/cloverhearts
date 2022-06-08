@@ -1,0 +1,78 @@
+import { BLOCK_TYPES } from "../Types.enum";
+import { NotionBlock } from "../../Models/Blocks";
+
+class TextBlockItem implements BlockItem {
+  readonly _block: BlockItem;
+  constructor(notionBlock: BlockItem) {
+    this._block = notionBlock;
+  }
+
+  get id(): string {
+    return this._block.id;
+  }
+
+  get type(): string {
+    return BLOCK_TYPES.TEXT;
+  }
+
+  get href(): string {
+    return this._block.href;
+  }
+
+  get attributes(): string[] {
+    return this._block.attributes;
+  }
+
+  get children(): BlockItem[] {
+    return this._block.children;
+  }
+
+  get value(): string {
+    return this._block.value;
+  }
+
+  toHTML(nestedBlocksHTML: string = ""): string {
+    const html = `<span class="${this.attributes.join(
+      " "
+    )}">${nestedBlocksHTML}${this.value}</span>`;
+    return this.href ? `<a href="${this.href}">${html}</a>` : html;
+  }
+}
+
+export const TextBlock = {
+  build(notionBlock: BlockItem | any): BlockItem {
+    if (NotionBlock.instanceOfBlockItem(notionBlock)) {
+      return new TextBlockItem(notionBlock);
+    }
+    const rawRes: any = notionBlock;
+    const blockItem = NotionBlock.Builder();
+    blockItem.id = rawRes.id;
+    blockItem.type = rawRes.type;
+    const richTexts: any[] = rawRes[blockItem.type]["rich_text"];
+    blockItem.children = richTexts.map((richText: any) => {
+      const textBlock = NotionBlock.Builder();
+      const type = richText.type;
+      const value = richText.plain_text;
+      const href = richText.href || "";
+      const attributes: string[] = Object.keys(richText.annotations)
+        .filter((annotation) => richText.annotations[annotation])
+        .map((annotation) => {
+          if (annotation === "color") {
+            return `color-${richText.annotations[annotation]}`;
+          }
+          return annotation;
+        });
+
+      textBlock.id = rawRes.id;
+      textBlock.type = type;
+      textBlock.value = value;
+      textBlock.href = href;
+      textBlock.attributes = [`notion-${BLOCK_TYPES.TEXT}`, ...attributes];
+
+      return TextBlock.build(textBlock.build());
+    });
+    blockItem.attributes = [`notion-${rawRes.type}`];
+
+    return new TextBlockItem(blockItem.build());
+  },
+};

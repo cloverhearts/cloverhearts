@@ -1,4 +1,9 @@
 import { BLOCK_TYPES } from "../Blocks/Types.enum";
+import { ParagraphBlock } from "../../Notion/Blocks/Paragraph/index.model";
+import { TextBlock } from "../Blocks/Text/index.model";
+import { Heading1Block } from "../Blocks/Heading_1/index.model";
+import { Heading2Block } from "../Blocks/Heading_2/index.model";
+import { Heading3Block } from "../Blocks/Heading_3/index.model";
 
 class NotionBlockItem implements BlockItem {
   readonly _id: string;
@@ -42,21 +47,24 @@ class NotionBlockItem implements BlockItem {
   }
 
   toHTML(): string {
-    const nestedBlocks: string[] = this.children.map(
-      (nestedBlock: BlockItem) => {
-        return nestedBlock.toHTML();
-      }
-    );
-
-    const nestedBlocksHTML: string = nestedBlocks.join("\n");
-    if (this.type === BLOCK_TYPES.PARAGRAPH) {
-      return `<p class="${this.attributes.join(" ")}">${nestedBlocksHTML}</p>`;
-    } else if (this.type === BLOCK_TYPES.TEXT) {
-      const html = `<span class="${this.attributes.join(
-        " "
-      )}">${nestedBlocksHTML}${this.value}</span>`;
-      return this.href ? `<a href="${this.href}">${html}</a>` : html;
-    }
+    // const nestedBlocks: string[] = this.children.map(
+    //   (nestedBlock: BlockItem) => {
+    //     return nestedBlock.toHTML();
+    //   }
+    // );
+    //
+    // const nestedBlocksHTML: string = nestedBlocks.join("\n");
+    // if (this.type === BLOCK_TYPES.PARAGRAPH) {
+    //   return ParagraphBlock.build(this).toHTML(nestedBlocksHTML);
+    // } else if (this.type === BLOCK_TYPES.TEXT) {
+    //   return TextBlock.build(this).toHTML(nestedBlocksHTML);
+    // } else if (this.type === BLOCK_TYPES.HEADING_1) {
+    //   return Heading1Block.build(this).toHTML(nestedBlocksHTML);
+    // } else if (this.type === BLOCK_TYPES.HEADING_2) {
+    //   return Heading2Block.build(this).toHTML(nestedBlocksHTML);
+    // } else if (this.type === BLOCK_TYPES.HEADING_3) {
+    //   return Heading3Block.build(this).toHTML(nestedBlocksHTML);
+    // }
     return "";
   }
 }
@@ -131,7 +139,12 @@ class NotionBlockBuilder {
   }
 }
 
+const instanceOfBlockItem = (someItem: any): boolean => {
+  return !("object" in someItem) && "children" in someItem;
+};
+
 export const NotionBlock = {
+  instanceOfBlockItem,
   Builder() {
     return new NotionBlockBuilder();
   },
