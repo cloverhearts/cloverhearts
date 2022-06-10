@@ -44,6 +44,10 @@ class NotionPageItem implements Page {
   get content(): BlockItem[] {
     return this._content;
   }
+
+  toHTML(): string {
+    return this.content.map((c) => c.toHTML()).join("\n");
+  }
 }
 
 class NotionPageBuilder {

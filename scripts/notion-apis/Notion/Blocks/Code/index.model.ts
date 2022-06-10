@@ -1,7 +1,8 @@
 import { BLOCK_TYPES } from "../Types.enum";
 import { NotionBlock } from "../../Models/Blocks";
+import { TextBlock } from "../Text/index.model";
 
-class TextBlockItem implements BlockItem {
+class CodeBlockItem implements BlockItem {
   readonly _block: BlockItem;
   constructor(notionBlock: BlockItem) {
     this._block = notionBlock;
@@ -12,7 +13,7 @@ class TextBlockItem implements BlockItem {
   }
 
   get type(): string {
-    return BLOCK_TYPES.TEXT;
+    return BLOCK_TYPES.VIDEO;
   }
 
   get href(): string {
@@ -32,24 +33,28 @@ class TextBlockItem implements BlockItem {
   }
 
   toHTML(nestedBlocksHTML: string = ""): string {
-    const html = `<span class="${this.attributes.join(
-      " "
-    )}">${nestedBlocksHTML}${this.value.split("\n").join("<br />")}</span>`;
-    return this.href ? `<a href="${this.href}">${html}</a>` : html;
+    const instedHTML: string = this.children
+      .map((child) => {
+        return child.toHTML();
+      })
+      .join("\n");
+
+    return `<pre><code class="language-${this.value}">\n${instedHTML}\n</code></pre>`;
   }
 }
 
-export const TextBlock = {
+export const CodeBlock = {
   build(notionBlock: BlockItem | any): BlockItem {
     if (NotionBlock.instanceOfBlockItem(notionBlock)) {
-      return new TextBlockItem(notionBlock);
+      return new CodeBlockItem(notionBlock);
     }
     const rawRes: any = notionBlock;
     const blockItem = NotionBlock.Builder();
     blockItem.id = rawRes.id;
     blockItem.type = rawRes.type;
-    const richTexts: any[] = rawRes[blockItem.type]["rich_text"];
-    blockItem.children = richTexts.map((richText: any) => {
+
+    const richtexts = rawRes[blockItem.type].rich_text;
+    const children = richtexts.map((richText: any) => {
       const textBlock = NotionBlock.Builder();
       const type = richText.type;
       const value = richText.plain_text;
@@ -71,8 +76,11 @@ export const TextBlock = {
 
       return TextBlock.build(textBlock.build());
     });
+
+    blockItem.children = children;
+    blockItem.value = rawRes[blockItem.type].language;
     blockItem.attributes = [`notion-${rawRes.type}`];
 
-    return new TextBlockItem(blockItem.build());
+    return new CodeBlockItem(blockItem.build());
   },
 };

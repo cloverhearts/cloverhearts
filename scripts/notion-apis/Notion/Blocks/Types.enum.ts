@@ -9,4 +9,6 @@ export const enum BLOCK_TYPES {
   BOOKMARK = "bookmark",
   VIDEO = "video",
   IMAGE = "image",
+  CALLOUT = "callout",
+  EMBED = "embed",
 }

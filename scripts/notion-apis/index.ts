@@ -12,6 +12,9 @@ import { DividerBlock } from "./Notion/Blocks/Divider/index.model";
 import { BookmarkBlock } from "./Notion/Blocks/Bookmark/index.model";
 import { VideoBlock } from "./Notion/Blocks/Video/index.model";
 import { ImageBlock } from "./Notion/Blocks/Image/index.model";
+import { CodeBlock } from "./Notion/Blocks/Code/index.model";
+import { CalloutBlock } from "./Notion/Blocks/Callout/index.model";
+import { EmbedBlock } from "./Notion/Blocks/Embed/index.model";
 
 const notion = new Client({
   auth: process.env.NOTION_TOKEN,
@@ -45,8 +48,14 @@ const notionBlockNormalizer = (blocks: CommonBlockType[]): BlockItem[] => {
           return VideoBlock.build(block);
         case "image":
           return ImageBlock.build(block);
+        case "code":
+          return CodeBlock.build(block);
+        case "callout":
+          return CalloutBlock.build(block);
+        case "embed":
+          return EmbedBlock.build(block);
         default:
-          console.log("UNKNOWN BLOCK", block);
+          console.warn("PASS - UNKNOWN BLOCK", block);
       }
 
       return NotionBlock.Builder().build();
@@ -58,8 +67,7 @@ export default {
   getBlogPageID,
   getBlogPublicDatabaseID,
   getUserList: async () => {
-    const list = await notion.users.list({});
-    return list;
+    await notion.users.list({});
   },
   getPosts: async (
     databaseID: string = getBlogPublicDatabaseID()
@@ -102,7 +110,6 @@ export default {
   getPostPage: async (pageID: string): Promise<Page> => {
     try {
       const postPageRes: any = await notion.pages.retrieve({ page_id: pageID });
-      console.log("PAGE ", postPageRes);
 
       if (postPageRes.object !== "page") {
         throw new Error("Object is not page.");

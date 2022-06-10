@@ -1,7 +1,8 @@
 import { BLOCK_TYPES } from "../Types.enum";
 import { NotionBlock } from "../../Models/Blocks";
+import { TextBlock } from "../Text/index.model";
 
-class TextBlockItem implements BlockItem {
+class EmbedBlockItem implements BlockItem {
   readonly _block: BlockItem;
   constructor(notionBlock: BlockItem) {
     this._block = notionBlock;
@@ -12,7 +13,7 @@ class TextBlockItem implements BlockItem {
   }
 
   get type(): string {
-    return BLOCK_TYPES.TEXT;
+    return BLOCK_TYPES.BOOKMARK;
   }
 
   get href(): string {
@@ -32,24 +33,42 @@ class TextBlockItem implements BlockItem {
   }
 
   toHTML(nestedBlocksHTML: string = ""): string {
-    const html = `<span class="${this.attributes.join(
-      " "
-    )}">${nestedBlocksHTML}${this.value.split("\n").join("<br />")}</span>`;
-    return this.href ? `<a href="${this.href}">${html}</a>` : html;
+    const instedHTML: string = this.children
+      .map((child) => {
+        return child.toHTML();
+      })
+      .join("\n");
+
+    let embedUrl = this.href;
+    if (/https:\/\/codepen.io/.test(embedUrl)) {
+      // codepen embedded
+      embedUrl = embedUrl.replace("/pen/", "/embed/");
+    }
+
+    return `
+<div class="notion-iframe-container">
+  <iframe 
+      class="${this.attributes.join(" ")}"
+      src="${embedUrl}" loading="lazy" allowtransparency="true" allowfullscreen="true">
+    </iframe>
+</div>
+    `;
   }
 }
 
-export const TextBlock = {
+export const EmbedBlock = {
   build(notionBlock: BlockItem | any): BlockItem {
     if (NotionBlock.instanceOfBlockItem(notionBlock)) {
-      return new TextBlockItem(notionBlock);
+      return new EmbedBlockItem(notionBlock);
     }
     const rawRes: any = notionBlock;
     const blockItem = NotionBlock.Builder();
     blockItem.id = rawRes.id;
     blockItem.type = rawRes.type;
-    const richTexts: any[] = rawRes[blockItem.type]["rich_text"];
-    blockItem.children = richTexts.map((richText: any) => {
+    blockItem.href = rawRes[blockItem.type].url;
+    const captions = rawRes[blockItem.type].caption;
+
+    const children = captions.map((richText: any) => {
       const textBlock = NotionBlock.Builder();
       const type = richText.type;
       const value = richText.plain_text;
@@ -67,12 +86,14 @@ export const TextBlock = {
       textBlock.type = type;
       textBlock.value = value;
       textBlock.href = href;
-      textBlock.attributes = [`notion-${BLOCK_TYPES.TEXT}`, ...attributes];
+      textBlock.attributes = [`notion-${BLOCK_TYPES.EMBED}`, ...attributes];
 
       return TextBlock.build(textBlock.build());
     });
+
+    blockItem.children = children;
     blockItem.attributes = [`notion-${rawRes.type}`];
 
-    return new TextBlockItem(blockItem.build());
+    return new EmbedBlockItem(blockItem.build());
   },
 };
