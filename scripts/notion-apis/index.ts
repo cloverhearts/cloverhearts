@@ -142,6 +142,9 @@ export default {
       keywords: [],
       subject: { color: "default", id: "UNKNOWN_ID", name: "UNKNOWN" },
       content: [],
+      toHTML(): string {
+        return `<div>EMPTY<div>`;
+      },
     };
   },
 };
