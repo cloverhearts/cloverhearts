@@ -4,12 +4,13 @@ type HomeProps = {
   posts: any[];
 };
 
-export async function getServerSideProps(): Promise<{ props: HomeProps }> {
+export async function getStaticProps(): Promise<{ props: HomeProps }> {
   const posts = await NOTION_APIS.getPosts();
   return { props: { posts: JSON.parse(JSON.stringify(posts)) } };
 }
 
-function Index(props: HomeProps) {
+function Index(props: HomeProps): JSX.Element {
+  console.log("PROPS ", props.posts);
   return (
     <ul>
       {props.posts.map((value: { _title: string }, index: number) => (

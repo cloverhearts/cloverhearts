@@ -1,3 +1,5 @@
+import * as fs from "fs";
+import * as path from "path";
 import NOTION_APIS from "../scripts/notion-apis";
 
 it("My first jest test case", async () => {
