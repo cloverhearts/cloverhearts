@@ -12,6 +12,7 @@ import { DividerBlock } from "./Notion/Blocks/Divider/index.model";
 import { BookmarkBlock } from "./Notion/Blocks/Bookmark/index.model";
 import { VideoBlock } from "./Notion/Blocks/Video/index.model";
 import { ImageBlock } from "./Notion/Blocks/Image/index.model";
+import { NumberedListItemBlock } from "./Notion/Blocks/NumberedListItem/index.model";
 import { CodeBlock } from "./Notion/Blocks/Code/index.model";
 import { CalloutBlock } from "./Notion/Blocks/Callout/index.model";
 import { EmbedBlock } from "./Notion/Blocks/Embed/index.model";
@@ -54,6 +55,9 @@ const notionBlockNormalizer = (blocks: CommonBlockType[]): BlockItem[] => {
           return CalloutBlock.build(block);
         case "embed":
           return EmbedBlock.build(block);
+        case "numbered_list_item":
+          return NumberedListItemBlock.build(block);
+        case "bulleted_list_item":
         default:
           console.warn("PASS - UNKNOWN BLOCK", block);
       }
@@ -75,6 +79,16 @@ export default {
     try {
       const databaseRes = await notion.databases.query({
         database_id: getBlogPublicDatabaseID(),
+        filter: {
+          and: [
+            {
+              property: "Published",
+              checkbox: {
+                equals: true,
+              },
+            },
+          ],
+        },
       });
 
       if (databaseRes.results.length <= 0) {
@@ -116,8 +130,9 @@ export default {
       }
 
       const blocks: any = await notion.blocks.children.list({
-        block_id: "bdbe5605-0155-4c03-a3a2-8f20ed231d5d",
+        block_id: postPageRes.id,
       });
+
       const content = notionBlockNormalizer(blocks.results);
 
       const page = NotionPage.Builder();

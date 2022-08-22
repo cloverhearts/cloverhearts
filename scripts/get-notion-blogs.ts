@@ -11,7 +11,6 @@ async function generatePostDatabase() {
 
   pages.map(async (postMeta: PostItem) => {
     const postPage: Page = await NOTION_APIS.getPostPage(postMeta.id);
-    console.log("POST ", postPage);
     fs.writeFileSync(
       path.join(__dirname, "..", "db", `post.${postMeta.id}.json`),
       JSON.stringify({ html: postPage.toHTML() })
