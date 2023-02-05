@@ -1,0 +1,221 @@
+h1.notion {
+
+}
+h2.notion {
+
+}
+h3.notion {
+
+}
+
+details.notion {
+  & {
+    details.notion {
+      margin-left: 1rem;
+    }
+  }
+  summary {
+    cursor: pointer;
+  }
+  p {
+    margin-left: 1rem;
+  }
+}
+
+ol.notion {
+  &.numbered_list_item {
+    padding-left: 1rem;
+  }
+}
+
+ul.notion {
+  &.bulleted_list_item {
+    padding-left: 1rem;
+  }
+}
+
+.divider.notion {
+  background: red;
+}
+
+blockquote.notion {
+  &.quote {
+
+  }
+}
+
+table.notion {
+  &.has_table_column_header {
+    tbody {
+      .table_row:nth-child(1){
+        background: #bbb;
+      }
+    }
+  }
+  &.has_table_row_header {
+    tbody {
+      .table_row td:nth-child(1){
+        background: #bbb;
+      }
+    }
+  }
+}
+
+time.notion.date {
+}
+
+.bookmark.notion {
+
+}
+
+.video.notion {
+  max-width: 100vw;
+  max-height: 100vh;
+  iframe {
+    width: 100%;
+    height: 50vh;
+  }
+}
+
+.image.notion {
+  max-width: 100vw;
+  max-height: 70vw;
+}
+
+.to_do.notion {
+  label {
+    .to_do.notion {
+      margin-left: 1rem;
+    }
+  }
+}
+
+.embed.notion {
+  max-width: 100vw;
+  width: 100%;
+  min-height: 20rem;
+}
+
+.link_preview.notion {
+  max-width: 100vw;
+  width: 100%;
+}
+
+.callout.notion {
+  .icon.notion {
+
+  }
+  .callout_context.notion {
+
+  }
+}
+
+.columnlist.notion-flex-container.notion {
+  display: flex;
+  .notion_flex_item {
+    flex: auto;
+  }
+}
+
+
+.notion {
+
+  &.default {
+    color: black;
+  }
+
+  &.gray {
+    color: gray;
+  }
+
+  &.brown {
+    color: brown;
+  }
+
+  &.orange {
+    color: orange;
+  }
+
+  &.yellow {
+    color: yellow;
+  }
+
+  &.green {
+    color: green;
+  }
+
+  &.blue {
+    color: blue;
+  }
+
+  &.purple {
+    color: purple;
+  }
+
+  &.pink {
+    color: pink;
+  }
+
+  &.red {
+    color: red;
+  }
+
+  &.default_background {
+    background: transparent;
+  }
+
+  &.gray_background {
+    background: gray;
+  }
+
+  &.brown_background {
+    background: brown;
+  }
+
+  &.orange_background {
+    background: orange;
+  }
+
+  &.yellow_background {
+    background: yellow;
+  }
+
+  &.green_background {
+    background: green;
+  }
+
+  &.blue_background {
+    background: blue;
+  }
+
+  &.purple_background {
+    background: purple;
+  }
+
+  &.pink_background {
+    background: pink;
+  }
+
+  &.red_background {
+    background: red;
+  }
+
+
+  &.rich_text {
+    &.italic {
+      font-style: italic;
+    }
+
+    &.bold {
+      font-weight: bold;
+    }
+
+    &.code {
+      color: red;
+    }
+
+    &.strikethrough {
+      text-decoration: line-through;
+    }
+  }
+}
