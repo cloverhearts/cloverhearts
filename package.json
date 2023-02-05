@@ -6,7 +6,7 @@
     "dev": "next dev",
     "setup": "npm-run-all setup:post:*",
     "setup:post:init-db": "node scripts/init-db.js",
-    "build": "next build",
+    "build": "next build && next export",
     "start": "next start",
     "lint": "next lint"
   },
@@ -17,6 +17,7 @@
     "@types/react-dom": "18.0.10",
     "eslint": "8.33.0",
     "eslint-config-next": "13.1.6",
+    "highlight.js": "^11.7.0",
     "next": "13.1.6",
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -25,8 +26,9 @@
   },
   "devDependencies": {
     "@notionhq/client": "^2.2.3",
+    "@types/highlight.js": "^10.1.0",
     "@types/styled-components": "^5.1.26",
-    "notion-page-to-semantic-html": "^0.9.0",
+    "notion-page-to-semantic-html": "^0.9.1",
     "npm-run-all": "^4.1.5",
     "sass": "^1.58.0"
   }
